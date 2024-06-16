@@ -1,0 +1,117 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+}
+
+.content {
+    position: absolute;
+    width: 100%;
+    height: 200%; /* Double height for scroll effect */
+}
+
+.strip {
+    width: 100%;
+    height: 20%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four columns */
+    grid-template-rows: repeat(2, 1fr); /* Two rows */
+    justify-items: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+.column {
+    width: 100%; /* Full width of the column */
+    height: 100%; /* Full height of the row */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically within the column */
+    align-items: center; /* Center content horizontally within the column */
+}
+
+.cell {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 30px;
+    width: 100%; /* Full width of the cell */
+    height: 100%; /* Full height of the cell */
+    display: flex;
+    justify-content: center; /* Center content horizontally within the cell */
+    align-items: center; /* Center content vertically within the cell */
+}
+
+.black-screen {
+    width: 100%;
+    height: 80%;
+    background-color: black;
+    position: relative;
+    overflow: hidden; /* Hide overflow to prevent scrollbar */
+}
+
+.lines-container {
+    position: absolute; /* Fix the container within the black screen */
+    top: 20%; /* Just below the white strip */
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.line {
+    font-size: 80px; /* Large font size */
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 0.3); /* Initial light white */
+    margin: 10px 0; /* Adjust spacing between lines */
+    transition: opacity 2s ease, transform 2s ease; /* Transition effect for opacity and transform */
+    transform-origin: center; /* Zoom from the center */
+    transform: scale(0.8); /* Initial zoom out effect */
+}
+
+.line.visible {
+    color: rgba(255, 255, 255, 1); /* Full white color when visible */
+    transform: scale(1); /* Zoom in to full size */
+}
+
+.word {
+    display: inline-block;
+    opacity: 0.3; /* Initial reduced opacity */
+    transition: opacity 0.5s ease; /* Transition effect for opacity */
+}
+
+.strikethrough {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 1); /* Full white color when visible */
+}
+
+.strikethrough::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%; /* Position at the center of the word */
+    width: 100%;
+    height: 8px; /* Height of the strikethrough line */
+    background-color: yellow; /* Color of the strikethrough line */
+    transform: scaleX(0); /* Initial scaleX value */
+    transform-origin: left center; /* Start from the left */
+    transition: transform 2s ease; /* Transition effect for transform */
+}
+
+.strikethrough.active::after {
+    transform: scaleX(1); /* Scale up to full width */
+}
+
+.new-word {
+    color: yellow;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 60px; /* Match the font size of the lines */
+    position: absolute;
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
